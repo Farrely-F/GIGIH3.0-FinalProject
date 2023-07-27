@@ -101,7 +101,6 @@ below is the list of API requests and responses
   - Sample of Success Response (http://localhost:3000/api/comments?videoID=video1)
 
 ```json
-// Sample response
 [
   {
     "username": "user1",
