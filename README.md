@@ -1,4 +1,3 @@
-
 # Generasi GIGIH3.0 MidTerm Project
 
 Hello coders! 👋 in this project, Generasi GIGIH3.0 assigned every si GIGIH in fullstack engineer path to create a REST API using Node.Js, Express, and MongoDB using Mongoose.
@@ -28,10 +27,9 @@ below is the list of API requests and responses
 - **Method:** GET
 - **Request Parameters:** None
 - **Response:**
-    - **Success Response:**
+  - **Success Response:**
 
 ```json
-// Sample response
 [
   {
     "videoID": "video1",
@@ -40,26 +38,26 @@ below is the list of API requests and responses
   {
     "videoID": "video2",
     "imageUrl": "https://example.com/thumbnail2.jpg"
-  },
-  ...
+  }
 ]
 ```
+
 - **Error/Fail Response:**
-    - *Response:* `500`
-        ```json
-        { error: "Failed to fetch video thumbnails" }
-        ```
+  - _Response:_ `500`
+    ```json
+    { "error": "Failed to fetch video thumbnails" }
+    ```
 
 ### 2. Get Products for a Video
 
 - **URL:** `/api/products`
 - **Method:** GET
 - **Request Parameters:**
-    - `videoID` (String, required): The ID of the video for which products are requested.
+  - `videoID` (String, required): The ID of the video for which products are requested.
 - **Success Response:**
+  - Sample of success response (http://localhost:3000/api/products?videoID=video1)
 
 ```json
-// Sample response
 [
   {
     "productID": "product1",
@@ -74,32 +72,33 @@ below is the list of API requests and responses
     "title": "Product 2",
     "price": 29.99,
     "videoID": "video1"
-  },
-  ...
+  }
 ]
 ```
+
 - **Error/Fail Response:**
-    - *Response :* `404` 
-        - (video not available)
-        ```json
-        { error: `Video with ${videoID} not found` }
-        ```
-        - (No products found on video)
-        ```json
-        { error: `No products found for ${videoID}` }
-        ```
-    - *Response :* `500`
-        ```json
-        { error: "Failed to fetch products" }
-        ```
+  - _Response :_ `404`
+    - (video not available)
+    ```json
+    { "error": "Video with ${videoID} not found" }
+    ```
+    - (No products found on video)
+    ```json
+    { "error": "No products found for ${videoID}" }
+    ```
+  - _Response :_ `500`
+    ```json
+    { "error": "Failed to fetch products" }
+    ```
 
 ### 3. Get Comments for a Video
 
 - **URL:** `/api/comments`
 - **Method:** GET
 - **Request Parameters:**
-    - `videoID` (String, required): The ID of the video for which comments are requested.
+  - `videoID` (String, required): The ID of the video for which comments are requested.
 - **Success Response:**
+  - Sample of Success Response (http://localhost:3000/api/comments?videoID=video1)
 
 ```json
 // Sample response
@@ -109,69 +108,64 @@ below is the list of API requests and responses
     "comment": "Great video!",
     "timestamp": "2023-07-27T12:34:56Z",
     "videoID": "video1"
-  },
-  {
-    "username": "user2",
-    "comment": "Awesome content!",
-    "timestamp": "2023-07-27T13:45:12Z",
-    "videoID": "video2"
-  },
-  ...
+  }
 ]
 ```
+
 - **Error/Fail Response:**
-    - *Response :* `404` 
-        - (video not available)
-        ```json
-        { error: `Video with ${videoID} not found` }
-        ```
-        - (No products found on video)
-        ```json
-        { error: `No Comments found for ${videoID}` }
-        ```
-    - *Response :* `500`
-        ```json
-        { error: "Failed to fetch Comments" }
-        ```
+  - _Response :_ `404`
+    - (video not available)
+    ```json
+    { "error": "Video with ${videoID} not found" }
+    ```
+    - (No products found on video)
+    ```json
+    { "error": "No Comments found for ${videoID}" }
+    ```
+  - _Response :_ `500`
+    ```json
+    { "error": "Failed to fetch Comments" }
+    ```
 
 ### 4. Submit a Comment
 
 - **URL:** `/api/comments`
 - **Method:** POST
 - **Request:**
+  - these request body is a must!
+
 ```json
-// Sample request body
 {
   "username": "user3",
   "comment": "I enjoyed this video!",
   "videoID": "video1"
-//   username, comment, and videoID are required. VideoID must be available!
 }
 ```
 
 - **Response:**
+  - Sucessfull Response
 
 ```json
-// Sample response
 {
   "success": "Comment by user3 in video1 submitted successfully"
 }
 ```
+
 - **Error/Fail Response:**
-    - *Response :* `400` 
-        - (doesn't match require fields)
-        ```json
-        { error: "all fields are required" }
-        ```
-    - *response :* `404`
-        - (Video not found)
-        ```json
-        { error: "Video not found" }
-        ```
-    - *Response :* `500`
-        ```json
-        { error: "Failed to submit comments" }
-        ```
+  - _Response :_ `400`
+    - (doesn't match require fields)
+    ```json
+    { "error": "all fields are required" }
+    ```
+  - _response :_ `404`
+    - (Video not found)
+    ```json
+    { "error": "Video not found" }
+    ```
+  - _Response :_ `500`
+    ```json
+    { "error": "Failed to submit comments" }
+    ```
 
 ## How to Run Locally
 
@@ -186,6 +180,7 @@ below is the list of API requests and responses
 ```bash
   cd (directory-name)
 ```
+
 3. Install the project dependencies using
 
 ```bash
@@ -199,6 +194,7 @@ below is the list of API requests and responses
 ```bash
   npm run seed
 ```
+
 6. Start the application using
 
 ```bash
