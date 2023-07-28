@@ -13,6 +13,32 @@ Hello coders! 👋 in this project, Generasi GIGIH3.0 assigned every si GIGIH in
 
 ![Database Structure](https://lh3.googleusercontent.com/u/2/drive-viewer/AITFw-wkzhiy6briDMtxC1ts8i3BMCEnLtEbhTtqv4CefIx4iP2Jo_uWmJlwlvMz0S0BIZxoqLQQt4waMikYl5fIb2WokRVaPg=w1600-h698)
 
+### Videos Collection
+
+Each document in the `videos` collection represents a video with the following fields:
+
+- `videoID` (String, required): : A unique identifier for the video.
+- `imageUrl` (String, required): The URL or path to the video's thumbnail image.
+
+### Products Collection
+
+Each document in the `products` collection represents a product associated with a specific video with the following fields:
+
+- `productID` (String, required): A unique identifier for the product.
+- `link` (String, required): The URL or path to the product.
+- `title` (String, required): The title or name of the product.
+- `price` (Number, required): The price of the product.
+- `videoID` (String, required): The videoID to which this product is associated.
+
+### Comments Collection
+
+Each document in the `comments` collection represents a comment made on a specific video with the following fields:
+
+- `username` (String, required): The username of the commenter.
+- `comment` (String, required): The content of the comment.
+- `timestamp` (Date, default: Date.now): The timestamp of when the comment was created.
+- `videoID` (String, required): The videoID to which this comment is associated.
+
 ## API Structure
 
 ![Database Structure](https://lh3.googleusercontent.com/u/2/drive-viewer/AITFw-zQCAhc_D69X-sF0-ssN2rkVOx6tuJF2L4ml-CItLn5Eulz0BRKTswCwhFeBMsKzc5YlDulE3SbjeJVX2JIEjw7jatRQg=w1600-h698)
@@ -171,13 +197,13 @@ below is the list of API requests and responses
 1. Clone the repository to your local machine.
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/Farrely-F/GIGIH3.0-midTerm.git
 ```
 
-2. Make sure youre on the right directory, if not do
+2. Make sure youre on the right directory. if not, change directory using
 
 ```bash
-  cd (directory-name)
+  cd GIGIH3.0-midTerm
 ```
 
 3. Install the project dependencies using
@@ -186,7 +212,7 @@ below is the list of API requests and responses
   npm install
 ```
 
-4. Ensure you have MongoDB installed and running at the specified `MONGODB_URL` in the `.env` file.
+4. Ensure you have MongoDB installed and running at the specified `MONGODB_URL` in the `.env` file. If you are confused, try checking out the .env example in`.env.example`
 
 5. Seed the database with dummy data by running
 
@@ -194,7 +220,7 @@ below is the list of API requests and responses
   npm run seed
 ```
 
-6. Start the application using
+6. Start the server using
 
 ```bash
   npm start
