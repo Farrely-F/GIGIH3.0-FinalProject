@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import useFetch from "./utils/useFetch";
 
 function App() {
+  // const { data } = useFetch("http://localhost:8080/api/videos");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Hello World</h1>
+      <p>My First React App</p>
+      {/* {data.map((video) => {
+        return (
+          <div key={video.videoID}>
+            <h2>{video.videoTitle}</h2>
+            <img src={video.imageUrl} alt="" />
+          </div>
+        );
+      })} */}
     </div>
   );
 }

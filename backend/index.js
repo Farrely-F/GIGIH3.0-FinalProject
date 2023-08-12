@@ -1,5 +1,6 @@
 // index.js
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -8,13 +9,13 @@ const routes = require("./routes/routes");
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // database url/mongoDB url
 const databaseUrl = process.env.MONGODB_URL;
 
 // Middleware
-app.use(bodyParser.json());
+app.use(cors(), bodyParser.json());
 
 // Database connection
 mongoose.connect(databaseUrl, {

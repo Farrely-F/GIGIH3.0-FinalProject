@@ -9,14 +9,14 @@ dotenv.config();
 
 // Temporary storage arrays
 const temporaryVideoData = [
-  { videoID: "video1", imageUrl: "https://example.com/thumbnail1.jpg" },
-  { videoID: "video2", imageUrl: "https://example.com/thumbnail2.jpg" },
+  { videoID: "video1", videoTitle: "Video 1", videoUrl: "https://www.youtube.com/watch?v=u3FmKZoM8b8", imageUrl: "https://ecs7.tokopedia.net/img/helpcenter/2020/06/step2-2.png" },
+  { videoID: "video2", videoTitle: "Video 2", videoUrl: "https://www.youtube.com/watch?v=VOcDtavMlYU", imageUrl: "https://ecs7.tokopedia.net/img/helpcenter/2020/06/step2-2.png" },
   // Add more video data here...
 ];
 
 const temporaryProductData = [
-  { productID: "product1", link: "https://example.com/product1", title: "Product 1", price: 19.99, videoID: "video1" },
-  { productID: "product2", link: "https://example.com/product2", title: "Product 2", price: 29.99, videoID: "video1" },
+  { productID: "product1", imageUrl: "https://images.tokopedia.net/img/cache/250-square/VqbcmM/2023/3/2/2f07b128-3d6e-4472-8d14-129655440c31.jpg", link: "https://example.com/product1", title: "Product 1", price: 19.99, videoID: "video1" },
+  { productID: "product2", imageUrl: "https://rembangnews.com/wp-content/uploads/2023/06/DM_EDCF38BC0FF9D117B6110AE83542DAF3_170323110346_mm.jpg", link: "https://example.com/product2", title: "Product 2", price: 29.99, videoID: "video1" },
   // Add more product data here...
 ];
 
