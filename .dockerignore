@@ -1,0 +1,16 @@
+# Ignore development and build artifacts
+node_modules
+build
+*.log
+.DS_Store
+
+# Ignore specific files that are not needed in the image
+.dockerignore
+.git
+.gitignore
+
+# Add any other files or directories that are not needed in the image
+# ...
+
+# Keep these files in the image (remove these lines if not applicable to your project)
+frontend/build

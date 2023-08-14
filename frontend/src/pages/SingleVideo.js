@@ -19,6 +19,39 @@ const SingleVideo = () => {
     comment: "",
   });
 
+  // State for comments and products
+  const [comments, setComments] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  // Function to fetch comments and products
+  const fetchCommentsAndProducts = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/videos/${videoId}`);
+      if (response.status === 200) {
+        setComments(response.data.comments);
+        setProducts(response.data.products);
+      }
+    } catch (error) {
+      console.error("Failed to fetch comments and products", error);
+    }
+  };
+
+  // Fetch comments and products on initial render
+  useEffect(() => {
+    fetchCommentsAndProducts();
+  }, []);
+
+  // Fetch comments and products at regular intervals
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchCommentsAndProducts();
+    }, 5000); // Fetch every 5 seconds
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   // Function to handle input change
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -62,6 +95,9 @@ const SingleVideo = () => {
           username: "",
           comment: "",
         });
+
+        // Fetch comments again to update the list with the new comment
+        fetchCommentsAndProducts();
       } else {
         // Handle error responses from the server
         console.error("Failed to submit comment");
@@ -86,16 +122,16 @@ const SingleVideo = () => {
     return <div>Video not found</div>;
   }
 
-  const { videoUrl, products, comments } = data;
+  const { videoUrl } = data;
 
   return (
     <div className="w-full min-h-screen flex">
-      <div className=" min-w-[15%] flex flex-col items-center">
+      <div className="min-w-[15%] flex flex-col items-center">
         {/* Render Product List Here */}
         {products && products.length > 0 ? (
           <div>
             <h3 className="font-bold text-2xl mb-4">Products</h3>
-            <ul className=" min-h-[500px] overflow-y-scroll">
+            <ul className="min-h-[500px] overflow-y-scroll">
               {products.map((product) => (
                 <li className="mb-4 p-4 rounded-md hover:bg-white/10" key={product.productID}>
                   <a href={product.link} target="_blank" rel="noopener noreferrer">
@@ -148,7 +184,7 @@ const SingleVideo = () => {
             <input type="text" className="block w-[200px]" name="username" value={newComment.username} onChange={handleInputChange} />
             <label className="text-white">Comment:</label>
             <textarea className="block mb-2 w-[200px]" name="comment" value={newComment.comment} onChange={handleInputChange} />
-            <button type="submit" className="bg-green-400 px-4 rounded-md">
+            <button type="submit" className="bg-green-600 px-4 py-1 rounded-md text-white">
               Send
             </button>
           </form>
