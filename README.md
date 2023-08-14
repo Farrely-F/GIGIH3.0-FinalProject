@@ -42,7 +42,8 @@ MongoDB account & Compass/atlas
 6. Start the server using on the backend folder
 
 ```bash
-  npm start
+  npm run dev
+  npm run seed
 ```
 
 7. The server will be running at `http://localhost:8080`.

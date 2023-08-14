@@ -223,7 +223,7 @@ below is the list of API requests and responses
 6. Start the server using
 
 ```bash
-  npm start
+  npm run dev
 ```
 
 7. The server will be running at `http://localhost:3000`.
