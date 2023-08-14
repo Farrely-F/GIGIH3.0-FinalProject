@@ -15,7 +15,7 @@ const useFetch = (url) => {
       }
     };
     videos();
-  }, []);
+  }, [url]);
   return { data };
 };
 

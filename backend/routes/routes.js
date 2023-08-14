@@ -24,6 +24,36 @@ router.get("/videos", async (req, res) => {
   }
 });
 
+// 2. Single Video - GET
+router.get("/videos/:videoID", async (req, res) => {
+  const videoID = req.params.videoID;
+
+  try {
+    // Fetch the video details
+    const video = await Video.findOne({ videoID }, { _id: 0, __v: 0 });
+    if (!video) {
+      return res.status(404).json({ error: `Video with ID ${videoID} not found` });
+    }
+
+    // Fetch the product list for the video
+    const products = await Product.find({ videoID }, { _id: 0, __v: 0 });
+
+    // Fetch the comment list for the video
+    const comments = await Comment.find({ videoID }, { _id: 0, __v: 0 });
+
+    // Combine the video details, product list, and comment list
+    const videoWithDetails = {
+      ...video.toObject(),
+      products,
+      comments,
+    };
+
+    res.json(videoWithDetails);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch video details" });
+  }
+});
+
 // 2. Product List - GET
 router.get("/products", async (req, res) => {
   const videoID = req.query.videoID;

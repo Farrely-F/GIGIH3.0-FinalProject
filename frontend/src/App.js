@@ -1,22 +1,24 @@
-import useFetch from "./utils/useFetch";
+import React from "react";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import Videos from "./pages/Videos";
+import SingleVideo from "./pages/SingleVideo";
 
-function App() {
-  // const { data } = useFetch("http://localhost:8080/api/videos");
-
+const App = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-      <p>My First React App</p>
-      {/* {data.map((video) => {
-        return (
-          <div key={video.videoID}>
-            <h2>{video.videoTitle}</h2>
-            <img src={video.imageUrl} alt="" />
-          </div>
-        );
-      })} */}
-    </div>
+    <BrowserRouter>
+      <div className="py-10 min-h-screen bg-[#29292a] text-[#ddcfc9]">
+        <div className="">
+          <Link to={"/"}>
+            <h1 className="text-2xl font-bold mb-8 text-center">Tokopedia Play</h1>
+          </Link>
+          <Routes>
+            <Route path="/" element={<Videos />} />
+            <Route path="/video/:videoId" element={<SingleVideo />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
