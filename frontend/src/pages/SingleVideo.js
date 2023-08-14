@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../utils/useFetch";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const formatTimestamp = (timestamp) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -11,7 +12,7 @@ const formatTimestamp = (timestamp) => {
 const SingleVideo = () => {
   const { videoId } = useParams();
   const navigate = useNavigate();
-  const { data, isLoading, error } = useFetch(`http://localhost:8080/api/videos/${videoId}`);
+  const { data, isLoading, error } = useFetch(`${API_BASE_URL}/videos/${videoId}`);
 
   // State for the new comment
   const [newComment, setNewComment] = useState({
@@ -26,7 +27,7 @@ const SingleVideo = () => {
   // Function to fetch comments and products
   const fetchCommentsAndProducts = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/videos/${videoId}`);
+      const response = await axios.get(`${API_BASE_URL}/videos/${videoId}`);
       if (response.status === 200) {
         setComments(response.data.comments);
         setProducts(response.data.products);
@@ -73,7 +74,7 @@ const SingleVideo = () => {
     try {
       // Send the comment to the backend API
       const response = await axios.post(
-        "http://localhost:8080/api/comments",
+        `${API_BASE_URL}/comments`,
         {
           username: newComment.username,
           comment: newComment.comment,
@@ -181,9 +182,9 @@ const SingleVideo = () => {
           )}
           <form className="absolute bottom-0 text-black" onSubmit={handleCommentSubmit}>
             <label className="text-white block">Username</label>
-            <input type="text" className="block w-[200px]" name="username" value={newComment.username} onChange={handleInputChange} />
+            <input type="text" className="block w-[200px] rounded-md" name="username" value={newComment.username} onChange={handleInputChange} />
             <label className="text-white">Comment:</label>
-            <textarea className="block mb-2 w-[200px]" name="comment" value={newComment.comment} onChange={handleInputChange} />
+            <textarea className="block mb-2 w-[200px] rounded-md" name="comment" value={newComment.comment} onChange={handleInputChange} />
             <button type="submit" className="bg-green-600 px-4 py-1 rounded-md text-white">
               Send
             </button>

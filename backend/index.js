@@ -1,9 +1,9 @@
-// index.js
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const path = require("path"); // Import path module
 const routes = require("./routes/routes");
 
 dotenv.config();
@@ -30,6 +30,14 @@ db.once("open", () => {
 
 // Use the routes with the "/api" prefix
 app.use("/api", routes);
+
+// Serve the frontend build (index.html and static files) from the "public" directory
+app.use(express.static(path.join(__dirname, "public")));
+
+// All other routes should point to the index.html file to support client-side routing
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Start the server with npm start and then use mock data/dummy data using node seed.js
 app.listen(PORT, () => {

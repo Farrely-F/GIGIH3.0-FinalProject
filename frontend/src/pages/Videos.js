@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../utils/useFetch";
+import { API_BASE_URL } from "../config";
 
 const Videos = () => {
-  const { data } = useFetch("http://localhost:8080/api/videos");
+  const { data } = useFetch(`${API_BASE_URL}/videos`);
 
   return (
     <div className="grid grid-cols-5 gap-10 p-10">
