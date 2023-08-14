@@ -2,6 +2,11 @@
 
 Hello coders! 👋 in this project, i created a Tokopedia Play clone app using ReactJS with Node and Express as a backend server with MongoDB as the database (MERN Stack)
 
+## Requirements
+
+Node & NPM
+MongoDB account & Compass/atlas
+
 ## How to Run Locally
 
 1. Clone the repository to your local machine.

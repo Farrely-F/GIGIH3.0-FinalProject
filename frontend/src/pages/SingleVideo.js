@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../utils/useFetch";
+import useVideoData from "../utils/useVideoData";
 import axios from "axios";
 import { API_BASE_URL } from "../config";
 
@@ -13,47 +14,13 @@ const SingleVideo = () => {
   const { videoId } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, error } = useFetch(`${API_BASE_URL}/videos/${videoId}`);
+  const { comments, products, fetchCommentsAndProducts } = useVideoData(videoId);
 
-  // State for the new comment
   const [newComment, setNewComment] = useState({
     username: "",
     comment: "",
   });
 
-  // State for comments and products
-  const [comments, setComments] = useState([]);
-  const [products, setProducts] = useState([]);
-
-  // Function to fetch comments and products
-  const fetchCommentsAndProducts = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/videos/${videoId}`);
-      if (response.status === 200) {
-        setComments(response.data.comments);
-        setProducts(response.data.products);
-      }
-    } catch (error) {
-      console.error("Failed to fetch comments and products", error);
-    }
-  };
-
-  // Fetch comments and products on initial render
-  useEffect(() => {
-    fetchCommentsAndProducts();
-  }, []);
-
-  // Fetch comments and products at regular intervals
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchCommentsAndProducts();
-    }, 5000); // Fetch every 5 seconds
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  // Function to handle input change
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setNewComment((prevComment) => ({
@@ -62,17 +29,14 @@ const SingleVideo = () => {
     }));
   };
 
-  // Function to submit a comment
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
 
-    // Check if the username or comment is empty
     if (!newComment.username || !newComment.comment) {
       return;
     }
 
     try {
-      // Send the comment to the backend API
       const response = await axios.post(
         `${API_BASE_URL}/comments`,
         {
@@ -88,30 +52,22 @@ const SingleVideo = () => {
       );
 
       if (response.status === 200) {
-        // Comment submitted successfully, handle response if needed
-        console.log("Comment submitted successfully");
-
-        // Clear the input fields after successful submission
         setNewComment({
           username: "",
           comment: "",
         });
-
-        // Fetch comments again to update the list with the new comment
         fetchCommentsAndProducts();
       } else {
-        // Handle error responses from the server
         console.error("Failed to submit comment");
       }
     } catch (error) {
-      // Handle network errors
       console.error("Network error while submitting comment", error);
     }
   };
 
   useEffect(() => {
     if (error) {
-      navigate("/404"); // Navigate to the 404 page in case of an error
+      navigate("/404");
     }
   }, [error, navigate]);
 
