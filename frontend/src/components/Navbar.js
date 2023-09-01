@@ -35,7 +35,7 @@ const Navbar = () => {
   return (
     <nav className={navbarClasses} onClick={scrollToTop}>
       <Link to={"/"}>
-        <img src="https://www.anakbangsabisa.org/generasi-gigih/assets/gengigih-homepage-footer-logo.png" className="h-full w-20" />
+        <img src="https://www.anakbangsabisa.org/generasi-gigih/assets/gengigih-homepage-footer-logo.png" className="h-full w-20" alt="logo-yabb" />
       </Link>
       <div className="flex items-center gap-x-2">
         <p className="font-medium text-xs">siGIGIH</p>
