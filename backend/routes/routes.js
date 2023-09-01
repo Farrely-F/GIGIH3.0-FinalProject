@@ -38,8 +38,8 @@ router.get("/videos/:videoID", async (req, res) => {
     // Fetch the product list for the video
     const products = await Product.find({ videoID }, { _id: 0, __v: 0 });
 
-    // Fetch the comment list for the video
-    const comments = await Comment.find({ videoID }, { _id: 0, __v: 0 });
+    // Fetch the comment list for the video, including the _id field
+    const comments = await Comment.find({ videoID }, { _id: 1, username: 1, comment: 1, timestamp: 1 });
 
     // Combine the video details, product list, and comment list
     const videoWithDetails = {
@@ -54,7 +54,7 @@ router.get("/videos/:videoID", async (req, res) => {
   }
 });
 
-// 2. Product List - GET
+// 3. Product List - GET
 router.get("/products", async (req, res) => {
   const videoID = req.query.videoID;
   if (!videoID) {
@@ -82,7 +82,7 @@ router.get("/products", async (req, res) => {
   }
 });
 
-// 3. Comment List - GET
+// 4. Comment List - GET
 router.get("/comments", async (req, res) => {
   const videoID = req.query.videoID;
   if (!videoID) {
@@ -96,8 +96,8 @@ router.get("/comments", async (req, res) => {
       return res.status(404).json({ error: `Comments in ${videoID} not found` });
     }
 
-    // Video exists, fetch the comments
-    const comments = await Comment.find({ videoID }, { _id: 0, __v: 0 });
+    // Video exists, fetch the comments including the _id field
+    const comments = await Comment.find({ videoID }).select("_id username comment timestamp");
 
     // Check if any products exist for the given videoID
     if (comments.length === 0) {
@@ -110,7 +110,7 @@ router.get("/comments", async (req, res) => {
   }
 });
 
-// 4. Submit Comment - POST
+// 5. Submit Comment - POST
 router.post("/comments", async (req, res) => {
   const { username, comment, videoID } = req.body;
   if (!username || !comment || !videoID) {
@@ -128,6 +128,25 @@ router.post("/comments", async (req, res) => {
     res.json({ success: `Comment by ${username} in ${videoID} submitted successfully` });
   } catch (err) {
     res.status(500).json({ error: "Failed to submit comment" });
+  }
+});
+
+// 6. Delete Comment - DELETE
+router.delete("/comments/:commentId", async (req, res) => {
+  const commentId = req.params.commentId;
+
+  try {
+    // Find the comment by ID and delete it
+    const deletedComment = await Comment.findByIdAndDelete(commentId);
+
+    if (!deletedComment) {
+      return res.status(404).json({ error: `Comment with ID ${commentId} not found` });
+    }
+
+    res.json({ message: "Comment deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete comment" });
   }
 });
 
