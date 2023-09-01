@@ -42,7 +42,7 @@ const Videos = () => {
         ) : data.length > 0 ? (
           data.map((video) => (
             <Link key={video.videoID} to={`/video/${video.videoID}`}>
-              <div className="group h-[560px] md:h-[320px] w-[240px] md:w-[172px] relative shadow hover:shadow-[0_0_16px_rgba(255,255,255,0.15)] rounded-lg hover:scale-105 transition ease-out duration-700 origin-center">
+              <div className="group h-[560px] md:h-[320px] w-[300px] md:w-[172px] relative shadow hover:shadow-[0_0_16px_rgba(255,255,255,0.15)] rounded-lg hover:scale-105 transition ease-out duration-700 origin-center">
                 <div className="w-full h-full relative rounded-lg">
                   <img src={video.imageUrl} className="w-full h-full object-cover rounded-lg" alt="vide_thumbnail" />
                   <div className="bg-[linear-gradient(to_bottom,rgba(0,0,0,0.2),rgba(0,0,0,1))] group-hover:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.6),rgba(0,0,0,1))] inset-0  absolute rounded-lg" />
