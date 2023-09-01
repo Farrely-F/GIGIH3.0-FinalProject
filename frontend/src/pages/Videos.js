@@ -44,7 +44,7 @@ const Videos = () => {
             <Link key={video.videoID} to={`/video/${video.videoID}`}>
               <div className="group h-[560px] md:h-[320px] w-[240px] md:w-[172px] relative shadow hover:shadow-[0_0_16px_rgba(255,255,255,0.15)] rounded-lg hover:scale-105 transition ease-out duration-700 origin-center">
                 <div className="w-full h-full relative rounded-lg">
-                  <img src={video.imageUrl} className="w-full h-full object-cover rounded-lg" />
+                  <img src={video.imageUrl} className="w-full h-full object-cover rounded-lg" alt="vide_thumbnail" />
                   <div className="bg-[linear-gradient(to_bottom,rgba(0,0,0,0.2),rgba(0,0,0,1))] group-hover:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.6),rgba(0,0,0,1))] inset-0  absolute rounded-lg" />
                 </div>
                 <h2 className="absolute bottom-5 left-5">{video.videoTitle}</h2>
@@ -60,7 +60,7 @@ const Videos = () => {
         <div className=" grid grid-cols-2 lg:grid-cols-4 mx-auto w-fit place-content-center place-items-center gap-10 md:gap-20">
           {techStacks.map((tech, techIndex) => (
             <div key={techIndex + 1} className="flex flex-col items-center gap-y-4">
-              <img src={tech.tech_logo} className="w-36 aspect-square object-scale-down rounded-lg bg-white" />
+              <img src={tech.tech_logo} className="w-36 aspect-square object-scale-down rounded-lg bg-white" alt="tech_stack_logo" />
               <p>{tech.tech_name}</p>
             </div>
           ))}

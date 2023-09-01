@@ -21,6 +21,7 @@ const useVideoData = (videoId) => {
 
   useEffect(() => {
     fetchCommentsAndProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoId]);
 
   return { comments, products, fetchCommentsAndProducts };
